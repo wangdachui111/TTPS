@@ -1,0 +1,26 @@
+{
+    "id": "3276FC53",
+    "path": "E:/hr_project/Target_predict/TMNP_1/help_plot_1.R",
+    "project_path": "help_plot_1.R",
+    "type": "r_source",
+    "hash": "1389558495",
+    "contents": "",
+    "dirty": false,
+    "created": 1664152901210.0,
+    "source_on_save": false,
+    "relative_order": 10,
+    "properties": {
+        "cursorPosition": "153,0",
+        "scrollLine": "0",
+        "tempName": "Untitled4",
+        "Source": "Source"
+    },
+    "folds": "94|57|115|0|\n121|54|151|0|\n153|51|171|0|\n",
+    "lastKnownWriteTime": 1664679190,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1664679190885,
+    "read_only": false,
+    "read_only_alternatives": []
+}

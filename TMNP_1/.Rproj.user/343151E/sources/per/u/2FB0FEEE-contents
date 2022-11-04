@@ -1,0 +1,109 @@
+BiocManager::install("ggplot2")
+update.packages("cli")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("ggplot2")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("yaml")
+BiocManager::install("tidyverse")
+library(tidyverse)
+BiocManager::install("stringi")
+
+
+fun_target <- function(querydata){
+  nsets<- length(target_module_dn_symbol[,1])
+  genenames<- rownames(querydata)
+  n_sample <- ncol(querydata)
+  A <-apply(querydata, 2,  function(x){order(x,decreasing = TRUE)})  
+  TES <- matrix(ncol = n_sample,nrow = nsets)
+  
+  for(q in 1:nsets){
+    up_gene_order <- match(target_module_up_symbol[q,], genenames)
+    up_gene_order <- up_gene_order[!is.na(up_gene_order)]
+    dw_gene_order <- match(target_module_dn_symbol[q,], genenames)
+    dw_gene_order <- dw_gene_order[!is.na(dw_gene_order)]
+    for (p in 1:n_sample) {
+      gene.list2 <- A[,p]
+      upES <- unlist(GSEA.EnrichmentScore2(gene.list = gene.list2, gene.set = up_gene_order, weighted.score.type = 0))
+      downES <- unlist(GSEA.EnrichmentScore2(gene.list = gene.list2, gene.set = dw_gene_order, weighted.score.type = 0))
+      TES[q,p] <- upES - downES
+    }
+  }
+  exist_set <- !is.na(TES[,1])
+  query.rowname <- rownames(target_module_dn_symbol)[exist_set]
+  TES <- matrix(TES[exist_set,],ncol = n_sample)
+  
+  ###2、计算random TESvalue
+  phi <- target_phi[exist_set,]
+  nsets1 <- length(phi[,1])
+  ###3、计算 p value  
+  pvalue <- matrix(nrow = nsets1,ncol = n_sample)
+  for(i in 1:n_sample){
+    for (j in 1:nsets1) {
+      pvalue[j,i] <- ifelse(TES[j,i] >= 0, sum(phi[j,] >= TES[j,i])/sum(phi[j,]>=0), 
+                            sum(phi[j,] < TES[j,i])/sum(phi[j,]<0))
+    } 
+  }
+  ###3、计算NESvalue and fdr value
+  # 
+  phi.pos.mean <- apply(phi,1,function(x){
+    mean(x[x>=0])
+  })
+  phi.neg.mean <- apply(phi,1,function(x){
+    mean(abs(x[x<0]))
+  })
+  
+  phi.norm.pos <- phi
+  phi.norm.pos[phi<0]<-0
+  phi.norm.pos <-phi.norm.pos/phi.pos.mean
+  phi.norm.neg <- phi
+  phi.norm.neg[phi>=0]<-0
+  phi.norm.neg <-phi.norm.neg/phi.neg.mean
+  phi.norm <- phi
+  phi.norm[phi<0] <- phi.norm.neg[phi<0]
+  phi.norm[phi>=0] <- phi.norm.pos[phi>=0]
+  #r#r#r#r#r#r#r#r#r#r#r#r#r#r
+  ES_query <- TES
+  ES_query.pos <- ES_query
+  ES_query.pos[ES_query<0]<-0
+  ES_query.pos <-ES_query.pos/phi.pos.mean
+  ES_query.neg <- ES_query
+  ES_query.neg[ES_query>=0]<-0
+  ES_query.neg <-ES_query.neg/phi.neg.mean
+  
+  ES_query.norm <- ES_query
+  ES_query.norm[ES_query<0] <- ES_query.neg[ES_query<0]
+  ES_query.norm[ES_query>=0] <- ES_query.pos[ES_query>=0]
+  
+  FDRvalue <- matrix(nrow = nsets1,ncol = n_sample)
+  
+  for(i in 1:n_sample){
+    for (j in 1:nsets1) {
+      if(ES_query.norm[j,i] >= 0){
+        A <- sum(phi.norm >= ES_query.norm[j,i])/sum(phi.norm>=0)
+        B <- sum(ES_query.norm >= ES_query.norm[j,i])/sum(ES_query.norm>=0)
+        FDRvalue[j,i] <- A/B 
+      }
+      else{
+        A <- sum(phi.norm <= ES_query.norm[j,i])/sum(phi.norm<0)
+        B <- sum(ES_query.norm <= ES_query.norm[j,i])/sum(ES_query.norm<0)
+        FDRvalue[j,i] <- A/B
+      } 
+    }                   
+  }
+  
+  query_target_gsea <- cbind(data.frame(query.rowname),TES,ES_query.norm, pvalue, FDRvalue)
+  rownames(query_target_gsea) <- query.rowname
+  colnames(query_target_gsea) <- c("Target name",paste(rep(colnames(querydata),times=4),rep(c("_CS","_NCS","_Pvalue","_FDR"),each=n_sample),sep = ""))
+  gc()
+  return(list(query_target_gsea=query_target_gsea))
+}
+
+target_1 <- fun_target(querydata)
+
+x = rownames(target)[target$Model_FDR <= 0.05 & target$XKA_FDR <=0.05]
+
+

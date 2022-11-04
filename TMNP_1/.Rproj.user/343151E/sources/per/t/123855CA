@@ -1,0 +1,26 @@
+{
+    "id": "123855CA",
+    "path": "E:/hr_project/Target_predict/TMNP_1/result_return.R",
+    "project_path": "result_return.R",
+    "type": "r_source",
+    "hash": "913531178",
+    "contents": "",
+    "dirty": true,
+    "created": 1664277179071.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "cursorPosition": "2,39",
+        "scrollLine": "0",
+        "tempName": "Untitled4",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1664282388,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1664331480138,
+    "read_only": false,
+    "read_only_alternatives": []
+}

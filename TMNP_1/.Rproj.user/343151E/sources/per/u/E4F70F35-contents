@@ -1,0 +1,86 @@
+heyejian <- read.csv("E:/hr_project/heyejian/heyejian_dif.csv",row.names = 1)
+
+heyejian <- read.csv("E:/hr_project/heyejian/heyejian/HYJ/HYJ_DEG_data.csv",row.names = 1)
+
+
+heyejian <- heyejian[,c(1,3)]
+colnames(heyejian) <- c("Model","HYJ")
+querydata <- heyejian
+
+
+
+Module = "Target Gene"
+target <- dat_return(Module)
+target_plot <- target[[2]]
+target_plot
+
+Module = "Pathway"
+pathway <- dat_return(Module)
+pathway_plot <- pathway[[2]]
+pathway_plot
+
+Module = "GO biological process"
+go <- dat_return(Module)
+go_plot <- go[[2]]
+go_plot
+
+Module = "Pathological process"
+pp <- dat_return(Module)
+pp_plot <- pp[[2]]
+pp_plot
+
+Module = "Cell"
+cell <- dat_return(Module)
+cell_plot <- cell[[2]]
+cell_plot
+
+
+
+Module = "Tissue"
+tissue <- dat_return(Module)
+tissue_plot <- tissue[[2]]
+tissue_plot
+
+Module = "DisGenet"
+dis <- dat_return(Module)
+dis_plot <- dis[[2]]
+dis_plot
+
+
+
+
+path <- dir("../result/HYJ_result/result/")
+path
+res <- list()
+for (i in 1:length(path)) {
+  x <- read.csv(paste0("../result/HYJ_result/result/",path[i]),row.names = 1)
+  res[[i]] <- x
+}
+[1] "result_Cell.csv"                  "result_DisGenet.csv"              "result_GO_biological_process.csv"
+[4] "result_Pathological_process.csv"  "result_Pathway.csv"
+
+
+
+x <- plot_fun(res_all = res,Module = 1,res_name = colnames(querydata),p_name = "Cell")
+x <- plot_fun(res_all = res,Module = 3,res_name = colnames(querydata),p_name = "GO_biological_process")
+x <- plot_fun(res_all = res,Module = 4,res_name = colnames(querydata),p_name = "Pathological_process")
+x <- plot_fun(res_all = res,Module = 5,res_name = colnames(querydata),p_name = "Pathway")
+
+
+
+
+
+easy_func_1 <- function(x1){
+  z = x+y
+  return(z)
+}
+
+easy_func <- function(x){
+  y= 4
+  z1 = easy_func_1(2)
+  z = x+y
+  return(z)
+}
+
+
+easy_func(4)

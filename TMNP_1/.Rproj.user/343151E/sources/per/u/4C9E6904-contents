@@ -1,0 +1,114 @@
+dat_return <- function(Module){
+  if (Module = "Target Gene"){
+    res_dat <- result_dat[[1]]
+    write.csv(res_dat,file = "Target_Gene.csv")
+    return(target)
+  }else if(Module = "Pathway"){
+    res_dat <- result_dat[[2]]
+    write.csv(res_dat,file = "result_Pathway.csv")
+    return(pathway)
+  }else if(Module = "GO biological process"){
+    res_dat <- result_dat[[3]]
+    write.csv(res_dat,file = "result_GO_biological_process.csv")
+  }else if(Module = "Pathological process"){
+    res_dat <- result_dat[[4]]
+    write.csv(res_dat,file = "result_Pathological_process.csv")
+  }else if(Module = "Cell"){
+    res_dat <- result_dat[[5]]
+    write.csv(res_dat,file = "result_Cell.csv")
+  }else if(Module = "Tissue"){
+    res_dat <- result_dat[[6]]
+    write.csv(res_dat,file = "result_Tissue.csv")
+  }else(Module = "DisGenet"){
+    res_dat <- result_dat[[7]]
+    write.csv(res_dat,file = "result_DisGenet.csv")
+  }
+  return(res_dat)
+}
+
+
+
+
+dat_return <- function(Module){
+  if (Module = "Target Gene"){
+    target <- fun_target(querydata)
+    write.csv(target,file = "result_Target_Gene.csv")
+    return(target)
+  }else if(Module = "Pathway"){
+    pathway <- fun_Pathway(querydata)
+    write.csv(res_dat,file = "result_Pathway.csv")
+    return(pathway)
+  }else if(Module = "GO biological_process"){
+    go_bp <- fun_GO(querydata)
+    write.csv(res_dat,file = "result_GO_biological_process.csv")
+  }else if(Module = "Pathological process"){
+    pp <- fun_pp(querydata)
+    write.csv(pp,file = "result_Pathological_process.csv")
+    return(pp)
+  }else if(Module = "Cell"){
+    cell <- fun_cell(querydata)
+    write.csv(cell,file = "result_Cell.csv")
+    return(cell)
+  }else if(Module = "Tissue"){
+    tissue <- fun_tissue(querydata)
+    write.csv(tissue,file = "result_Tissue.csv")
+  }else(Module = "DisGenet"){
+    disgenet <- fun_disgenet(querydata)
+    write.csv(disgenet,file = "result_DisGenet.csv")
+    return(disgenet)
+  }
+  return(res_dat)
+}
+result_of_module <- dat_return(Module)
+
+
+plot_return <- function(Module){
+  if (Module == "Target Gene"){
+    P <- plot_fun(res_all = result_dat,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "Pathway"){
+    P <- plot_fun(res_all = result_dat,Module = 2,res_name = colnames(querydata))
+  }else if(Module == "GO biological process"){
+    P <- plot_fun(res_all = result_dat,Module = 3,res_name = colnames(querydata))
+  }else if(Module == "Pathological process"){
+    P <- plot_fun(res_all = result_dat,Module = 4,res_name = colnames(querydata))
+  }else if(Module == "Cell"){
+    P <- plot_fun(res_all = result_dat,Module = 5,res_name = colnames(querydata))
+  }else if(Module == "Tissue"){
+    P <- plot_fun(res_all = result_dat,Module = 6,res_name = colnames(querydata))
+  }else if(Module == "DisGenet"){
+    P <- plot_fun(res_all = result_dat,Module = 7,res_name = colnames(querydata))
+  }
+  return(P)
+}
+
+for (i in 1:7) {
+  plot_fun(res_all = result_dat,Module = i,res_name = colnames(querydata))
+}
+
+
+
+plot_return <- function(Module){
+  if (Module == "Target Gene"){
+    p_name <- "Target_Gene"
+    P <- plot_fun(res_all = res_target,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "Pathway"){
+    p_name <- "Pathway"
+    P <- plot_fun(res_all = res_pathway,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "GO biological process"){
+    p_name <- "GO_biological_process"
+    P <- plot_fun(res_all = res_GO,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "Pathological process"){
+    p_name <- "Pathological_process"
+    P <- plot_fun(res_all = res_pp,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "Cell"){
+    p_name <- "Cell"
+    P <- plot_fun(res_all = res_cell,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "Tissue"){
+    p_name <- "Tissue"
+    P <- plot_fun(res_all = res_tissue,Module = 1,res_name = colnames(querydata))
+  }else if(Module == "DisGenet"){
+    p_name <- "DisGenet"
+    P <- plot_fun(res_all = res_dis,Module = 1,res_name = colnames(querydata))
+  }
+  return(P)
+}

@@ -1,0 +1,26 @@
+{
+    "id": "4684ED38",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1664153091916.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "id": "70d9317445a149e89035b990d280be54",
+        "name": "target_1",
+        "title": "target_1",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 28429462281388127,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1664153091916,
+    "read_only": false,
+    "read_only_alternatives": []
+}

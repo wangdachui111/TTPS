@@ -1,0 +1,25 @@
+{
+    "id": "C9FA43AF",
+    "path": "E:/hr_project/Target_predict/TMNP_1/helper_TMNP.R",
+    "project_path": "helper_TMNP.R",
+    "type": "r_source",
+    "hash": "3389163",
+    "contents": "",
+    "dirty": false,
+    "created": 1664527606769.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "cursorPosition": "163,3",
+        "scrollLine": "147",
+        "Source": "Source"
+    },
+    "folds": "56|31|67|0|\n",
+    "lastKnownWriteTime": 1664183974,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1664967289432,
+    "read_only": false,
+    "read_only_alternatives": []
+}
