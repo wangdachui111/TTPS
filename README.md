@@ -7,22 +7,22 @@ You can download the data required for caculation on
 #### TMNP_1 
 需要安装4.2.0以上版本，所需R包可以运行*TMNP_1/packages_installation.R*
 #### Network_Evaluation_Tools-master_2
-` ``
+```
 conda create -n py27 python=2.7
 conda activate py27
 pip install argparse
 pip install neworkx
 pip install scipy
 pip install scikit-learn
-` ``
+```
 #### DeepPurpose-master
-` ``
+```
 conda create -n DeepPurpose python=3.6
 conda activate DeepPurpose
 conda install -c conda-forge rdkit
 pip install descriptastorus 
 pip install DeepPurpose
-` ``
+```
 
 
 ## 简介
